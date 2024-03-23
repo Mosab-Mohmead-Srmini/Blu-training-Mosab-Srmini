@@ -1,0 +1,36 @@
+<div
+  class="table-container"
+  *ngFor="let tableData of tablesData; let i = index"
+>
+  <table class="table">
+    <thead>
+      <tr>
+        <th
+          [style.color]="getHeaderColor(i)[0]"
+          [style.background-color]="getHeaderColor(i)[1]"
+        >
+          Firstname
+        </th>
+        <th
+          [style.color]="getHeaderColor(i)[0]"
+          [style.background-color]="getHeaderColor(i)[1]"
+        >
+          Lastname
+        </th>
+        <th
+          [style.color]="getHeaderColor(i)[0]"
+          [style.background-color]="getHeaderColor(i)[1]"
+        >
+          Email
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let person of persons">
+        <td>{{ person.firstname }}</td>
+        <td>{{ person.lastname }}</td>
+        <td>{{ person.email }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

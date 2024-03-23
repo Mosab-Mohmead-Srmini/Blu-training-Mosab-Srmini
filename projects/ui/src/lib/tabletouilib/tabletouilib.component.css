@@ -1,0 +1,27 @@
+.table-container {
+  margin: .7rem;
+}
+
+table {
+  width: 99%;
+  border-collapse: collapse;
+}
+
+thead th {
+  text-align: left;
+  font-size: 1.3rem;
+  padding: .7rem;
+}
+
+tbody tr td {
+  text-align: left;
+  font-size: 1.3rem;
+  padding: .7rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.second-table th {
+  background-color: rgb(183, 223, 226);
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+}
