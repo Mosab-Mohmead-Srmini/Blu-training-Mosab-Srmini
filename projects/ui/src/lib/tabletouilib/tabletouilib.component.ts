@@ -1,16 +1,28 @@
 import { Component } from '@angular/core';
 import { IPerson, people } from '../../../module/IPerson';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { FilterService } from '../../../module/filter.service';
+
 @Component({
   selector: 'MyProject-tabletouilib',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './tabletouilib.component.html',
   styleUrl: './tabletouilib.component.css',
 })
 export class TabletouilibComponent {
-  persons: IPerson[] = people;
+  persons: IPerson[] = [];
+  filteredPersons: IPerson[] = [];
+  firstNameFilter: string = '';
+  lastNameFilter: string = '';
+  emailFilter: string = '';
   tablesData: number[] = Array.from({ length: 2 }, (_, index) => index + 1);
+
+  constructor(private filterService: FilterService) {
+    this.persons = people;
+    this.filteredPersons = [...this.persons];
+  }
 
   getHeaderColor(index: number): string[] {
     if (index === 0) {
@@ -20,5 +32,14 @@ export class TabletouilibComponent {
     } else {
       return ['#000', '#ffffff']; // Black text with white background for other indices
     }
+  }
+
+  applyFilter(): void {
+    this.filteredPersons = this.filterService.filterPersons(
+      this.persons,
+      this.firstNameFilter,
+      this.lastNameFilter,
+      this.emailFilter
+    );
   }
 }

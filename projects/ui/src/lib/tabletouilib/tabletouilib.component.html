@@ -1,36 +1,36 @@
-<div
-  class="table-container"
-  *ngFor="let tableData of tablesData; let i = index"
->
+<div class="inputs">
+  <input type="text" [(ngModel)]="firstNameFilter" (input)="applyFilter()" name="firstname" id="firstname" placeholder="Filter on First Name">
+  <input type="text" [(ngModel)]="lastNameFilter" (input)="applyFilter()" name="lastname" id="lastname" placeholder="Filter on Last Name">
+  <input type="text" [(ngModel)]="emailFilter" (input)="applyFilter()" name="email" id="email" placeholder="Filter on Email">
+</div>
+
+<div class="table-container" *ngFor="let tableData of tablesData; let i = index">
   <table class="table">
     <thead>
       <tr>
-        <th
-          [style.color]="getHeaderColor(i)[0]"
-          [style.background-color]="getHeaderColor(i)[1]"
-        >
+        <th [style.color]="getHeaderColor(i)[0]" [style.background-color]="getHeaderColor(i)[1]">
           Firstname
         </th>
-        <th
-          [style.color]="getHeaderColor(i)[0]"
-          [style.background-color]="getHeaderColor(i)[1]"
-        >
+        <th [style.color]="getHeaderColor(i)[0]" [style.background-color]="getHeaderColor(i)[1]">
           Lastname
         </th>
-        <th
-          [style.color]="getHeaderColor(i)[0]"
-          [style.background-color]="getHeaderColor(i)[1]"
-        >
+        <th [style.color]="getHeaderColor(i)[0]" [style.background-color]="getHeaderColor(i)[1]">
           Email
         </th>
       </tr>
     </thead>
-    <tbody>
-      <tr *ngFor="let person of persons">
+    <tbody *ngIf="filteredPersons.length > 0; else notFound">
+      <tr *ngFor="let person of filteredPersons">
         <td>{{ person.firstname }}</td>
         <td>{{ person.lastname }}</td>
         <td>{{ person.email }}</td>
       </tr>
     </tbody>
+    <ng-template #notFound>
+      <tr>
+        <td colspan="3" class="text-center text-danger fw-bold fs-5">{{ firstNameFilter }} {{ lastNameFilter }} {{ emailFilter }} : Not Found</td>
+      </tr>
+    </ng-template>
+
   </table>
 </div>
